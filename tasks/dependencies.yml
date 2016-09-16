@@ -14,3 +14,4 @@
     - python-dev
     - libffi-dev
     - rsyslog
+    - git-core
