@@ -1,0 +1,18 @@
+[Unit]
+Description=CalDAV and CardDAV server
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+PrivateTmp=yes
+# Run ExecStartPre with root-permissions
+PermissionsStartOnly=true
+User={{ radicale_user }}
+Group={{ radicale_user }}
+ExecStartPre=-/bin/mkdir -p {{ radicale_pid_dir }}
+ExecStartPre=/bin/chown -R {{ radicale_user }}:{{ radicale_group }} {{ radicale_pid_dir }}
+PIDFile={{ radicale_pid_dir }}/{{ radicale_pid_file }}
+ExecStart={{ radicale_download_dir }}/radicale.py -p "{{ radicale_pid_dir }}/{{ radicale_pid_file }}" -C /etc/radicale/config
+
+[Install]
+WantedBy=default.target

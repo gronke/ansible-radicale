@@ -1,0 +1,37 @@
+---
+
+- name: radicale group exists
+  group:
+    name: "{{ radicale_group }}"
+    state: present
+
+- name: radicale user exists
+  user:
+    name: "{{ radicale_user }}"
+    home: "{{ radicale_user_home }}"
+    group: "{{ radicale_group }}"
+    state: present
+
+- name: /etc/radicale folder exists
+  file:
+    path: /etc/radicale
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: radicale collection folder exists
+  file:
+    path: "{{ radicale_collections_dir }}"
+    state: directory
+    owner: "{{ radicale_user }}"
+    group: "{{ radicale_group }}"
+    mode: 0770
+
+- name: log file is writable
+  file:
+    path: "{{ radicale_log_file }}"
+    state: touch
+    owner: root
+    group: "{{ radicale_group }}"
+    mode: 0660

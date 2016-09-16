@@ -1,0 +1,26 @@
+---
+
+- name: radicale is configured
+  template:
+    src: "./{{item}}.j2"
+    dest: "/etc/radicale/{{item}}"
+    owner: root
+    group: "{{ radicale_group }}"
+    mode: 0750
+  with_items:
+    - logging
+    - config
+
+- name: systemd service is available
+  template:
+    src: "./systemd.service.j2"
+    dest: "/etc/systemd/system/{{ radicale_service_name }}.service"
+    owner: root
+    group: root
+    mode: 0755
+
+- name: radicale service is enabled
+  service:
+    name: "{{ radicale_service_name }}"
+    enabled: yes
+  notify: restart radicale

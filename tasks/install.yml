@@ -1,0 +1,10 @@
+---
+
+- name: radicale is downloaded
+  git:
+    repo: "{{ radicale_git_url }}"
+    version: "{{ radicale_version }}"
+    dest: "{{ radicale_download_dir }}"
+    update: yes
+    depth: 1
+  notify: restart radicale

@@ -1,0 +1,14 @@
+{% for radicale_logging_main_name, radicale_logging_main in _radicale_logging.iteritems() %}
+{% if((radicale_logging_main == true) or (radicale_logging_main == false) or (radicale_logging_main is number) or (radicale_logging_main is string)) %}
+{{ radicale_logging_main_name | lower }}: {{ radicale_logging_main }}
+{% endif %}
+{% endfor %}
+{% for radicale_logging_main_name, radicale_logging_main in _radicale_logging.iteritems() %}
+{% if(not((radicale_logging_main == true) or (radicale_logging_main == false) or (radicale_logging_main is number) or (radicale_logging_main is string))) %}
+
+[{{ radicale_logging_main_name | lower }}]
+{% for radicale_logging_sub_name, radicale_logging_sub in radicale_logging_main.iteritems() %}
+{{ radicale_logging_sub_name | lower }}: {{ radicale_logging_sub }}
+{% endfor %}
+{% endif %}
+{% endfor %}

@@ -1,0 +1,9 @@
+---
+
+- set_fact: _radicale_config="{{ radicale_default_config | combine(radicale_config | default({}), recursive=True) }}"
+- set_fact: _radicale_logging="{{ radicale_default_logging | combine(radicale_logging | default({}), recursive=True) }}"
+
+- include: dependencies.yml
+- include: prepare.yml
+- include: install.yml
+- include: configure.yml

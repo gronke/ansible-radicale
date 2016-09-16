@@ -1,0 +1,7 @@
+---
+
+- name: restart radicale
+  service:
+    name: radicale
+    status: restarted
+    daemon_reload: true
